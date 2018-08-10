@@ -1,12 +1,14 @@
 driver:
   name: vagrant
   cachier: true
+  synced_folders:
+    - [ '.', '/media/shared/' ]
 
 provisioner:
   name: shell
 
 platforms:
-- name: ubuntu/zenial64
+- name: ubuntu/xenial64
 - name: ubuntu/bionic64
 - name: centos/7
 # TODO Need to find a macos image

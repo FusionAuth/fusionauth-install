@@ -1,0 +1,16 @@
+driver:
+  name: vagrant
+  cachier: true
+
+provisioner:
+  name: shell
+
+platforms:
+- name: ubuntu/zenial64
+- name: ubuntu/bionic64
+- name: centos/7
+# TODO Need to find a macos image
+# TODO Test on windows?
+
+suites:
+- name: default

@@ -41,15 +41,10 @@ install_zip() {
   curl -o /tmp/fusionAuth-backend.zip "https://storage.googleapis.com/inversoft_products_j098230498/products/passport/${VERSION}/passport-backend-${SUFFIX}${VERSION}.zip"
   curl -o /tmp/fusionAuth-search-engine.zip "https://storage.googleapis.com/inversoft_products_j098230498/products/passport/${VERSION}/passport-search-engine-${SUFFIX}${VERSION}.zip"
 
-  sudo mkdir -p /usr/local/inversoft/fusionAuth
+  TARGET_DIR=${HOME}/fusionauth
 
-  sudo unzip /tmp/fusionAuth-backend.zip -n -d /usr/local/inversoft/fusionAuth
-  sudo unzip /tmp/fusionAuth-search-engine.zip -n -d /usr/local/inversoft/fusionAuth
+  sudo mkdir -p ${TARGET_DIR}
 
-  sudo mv "/usr/local/inversoft/passport-backend-${VERSION}" /usr/local/inversoft/fusionAuth-backend
-  sudo mv "/usr/local/inversoft/passport-search-engine-${VERSION}" /usr/local/inversoft/fusionAuth-search-engine
-
-  # TODO Symlink init script
-  # Need to determine the systems init system and install a script that isn't shipped in the zip yet.
+  unzip /tmp/fusionAuth-backend.zip -n -d ${TARGET_DIR}
+  unzip /tmp/fusionAuth-search-engine.zip -n -d ${TARGET_DIR}
 }
-

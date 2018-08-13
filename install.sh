@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-set -o xtrace
-
+TARGET_DIR=${HOME}/fusionauth
 VERSION=$(curl https://www.inversoft.com/latest-passport-version)
 SUFFIX=""
 
@@ -9,7 +8,7 @@ install_linux() {
   # Detect dpkg and rpm, fallback to zip
   if hash dpkg; then
     install_deb;
-  elif hash yum; then
+  elif hash rpm; then
     install_rpm;
   else
     install_zip;
@@ -27,14 +26,12 @@ install_rpm() {
   curl -fsSL -o /tmp/fusionAuth-backend.rpm "https://storage.googleapis.com/inversoft_products_j098230498/products/passport/${VERSION}/passport-backend-${VERSION}-1.noarch.rpm"
   curl -fsSL -o /tmp/fusionAuth-search-engine.rpm "https://storage.googleapis.com/inversoft_products_j098230498/products/passport/${VERSION}/passport-search-engine-${VERSION}-1.noarch.rpm"
 
-  sudo rpm -i /tmp/fusionAuth-backend.deb /tmp/fusionAuth-search-engine.rpm
+  sudo rpm -i /tmp/fusionAuth-backend.rpm /tmp/fusionAuth-search-engine.rpm
 }
 
 install_zip() {
   curl -fsSL -o /tmp/fusionAuth-backend.zip "https://storage.googleapis.com/inversoft_products_j098230498/products/passport/${VERSION}/passport-backend-${SUFFIX}${VERSION}.zip"
   curl -fsSL -o /tmp/fusionAuth-search-engine.zip "https://storage.googleapis.com/inversoft_products_j098230498/products/passport/${VERSION}/passport-search-engine-${SUFFIX}${VERSION}.zip"
-
-  TARGET_DIR=${HOME}/fusionauth
 
   sudo mkdir -p ${TARGET_DIR}
 
@@ -44,7 +41,6 @@ install_zip() {
 
 case $(uname -s) in
     Linux*)     install_linux;;
-    CYGWIN*)    install_zip;;
     Darwin*)    SUFFIX="macos-"; install_zip;;
     *)          echo "Unsupported platform, will attempt the zip install"; install_zip;;
 esac

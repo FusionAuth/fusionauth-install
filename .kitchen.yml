@@ -8,10 +8,10 @@ provisioner:
   name: shell
 
 platforms:
-- name: ubuntu/xenial64
-- name: ubuntu/bionic64
-- name: centos/7
-# TODO Need to find a macos image
+- name: bento/ubuntu-16.04
+- name: bento/ubuntu-18.04
+- name: bento/centos-7.4
+# Testing on mac will require packaging our own image and altering the way we share the script (mac has no guest additions)
 # TODO Test on windows?
 
 suites:

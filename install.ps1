@@ -13,14 +13,6 @@ if(($PSVersionTable.PSVersion.Major) -lt 5) {
     break
 }
 
-# show notification to change execution policy:
-if((get-executionpolicy) -gt 'RemoteSigned') {
-    Write-Output "PowerShell requires an execution policy of 'RemoteSigned' to run our installer."
-    Write-Output "To make this change please run:"
-    Write-Output "'Set-ExecutionPolicy RemoteSigned -scope CurrentUser'"
-    break
-}
-
 function DownloadAndExpandZip($uri, $tempFile, $destination) {
     Write-Output "Downloading archive"
 

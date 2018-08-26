@@ -1,15 +1,46 @@
 #!/usr/bin/env bash
 
-# Default to home/fusionAuth but keep any existing value.
-TARGET_DIR=${TARGET_DIR:-${HOME}/fusionAuth}
-VERSION=$(curl https://www.inversoft.com/latest-passport-version)
+if ! hash curl > /dev/null 2>&1; then
+    echo "curl is required to download the packages and determine version. Install curl and try again."
+    exit 1
+fi
+
+FORCE_ZIP=0
 SUFFIX=""
+TARGET_DIR=${TARGET_DIR:-${HOME}/fusionAuth} # Default to home/fusionAuth but keep any existing value.
+VERSION=$(curl https://www.inversoft.com/latest-passport-version)
+
+print_usage() {
+    echo "FusionAuth installer"
+    echo ""
+    echo "./install [options]"
+    echo ""
+    echo "options:"
+    echo "-z   Force install using a zip file even if a supported package system is detected"
+}
+
+while getopts 'hz' opt
+do
+    case "${opt}" in
+        h)
+            print_usage
+            exit 0
+            ;;
+        z)
+            FORCE_ZIP=1
+            ;;
+        *)
+            print_usage
+            exit 1
+            ;;
+    esac
+done
 
 install_linux() {
   # Detect dpkg and rpm, fallback to zip
-  if hash dpkg > /dev/null 2>&1; then
+  if [[ ${FORCE_ZIP} != 1 ]] && hash dpkg > /dev/null 2>&1; then
     install_deb;
-  elif hash rpm > /dev/null 2>&1; then
+  elif [[ ${FORCE_ZIP} != 1 ]] && hash rpm > /dev/null 2>&1; then
     install_rpm;
   else
     install_zip;

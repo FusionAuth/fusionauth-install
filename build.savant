@@ -1,0 +1,50 @@
+/*
+ * Copyright (c) 2018, Inversoft Inc., All Rights Reserved
+ */
+
+savantVersion = "1.0.0"
+
+project(group: "com.inversoft.passport", name: "fusionAuth-install", version: "1.22.0", licenses: ["ApacheV2_0"]) {
+  workflow {
+    standard()
+  }
+
+  publishWorkflow {
+    subversion(repository: "http://svn.inversoft.org/savant")
+  }
+
+  publications {
+    main {
+      publication(name: "fusionAuth-install", type: "sh", file: "fusionAuth-install-${project.version}.sh")
+    }
+  }
+}
+
+idea = loadPlugin(id: "org.savantbuild.plugin:idea:1.0.1")
+release = loadPlugin(id: "org.savantbuild.plugin:release-git:${savantVersion}")
+
+target(name: "clean", description: "Cleans up the vagrant images") {
+  def clean = "bundle exec kitchen destroy".execute()
+  clean.waitFor()
+}
+
+target(name: "test", description: "Tests the install script against pre-configured machine images") {
+  def test = "bundle exec kitchen test".execute()
+  test.consumeProcessOutput(System.out, System.err)
+  test.waitFor()
+  if (test.exitValue() != 0) {
+    print "Tests failed!"
+    System.exit(1)
+  }
+}
+
+target(name: "idea", description: "Updates the Intellij IDEA module file") {
+  idea.iml()
+}
+
+target(name: "int", description: "Releases a local integration build of the project", dependsOn: ["test"]) {
+}
+
+target(name: "release", description: "Releases a full version of the project", dependsOn: ["int"]) {
+  release.release()
+}

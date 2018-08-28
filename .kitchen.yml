@@ -1,0 +1,21 @@
+driver:
+  name: vagrant
+  cachier: true
+  synced_folders:
+    - [ '.', '/media/shared/' ]
+
+provisioner:
+  name: shell
+
+platforms:
+- name: bento/ubuntu-16.04
+- name: bento/ubuntu-18.04
+- name: bento/centos-7.4
+# Testing on mac will require packaging our own image and altering the way we share the script (mac has no guest additions)
+# TODO Test on windows?
+
+verifier:
+  name: serverspec
+
+suites:
+- name: default

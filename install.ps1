@@ -44,8 +44,15 @@ $VERSION= Invoke-WebRequest -Uri https://www.inversoft.com/api/fusionauth/latest
 DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-app-${VERSION}.zip" "$env:Temp\FusionAuth-app.zip" "$env:UserProfile\FusionAuth"
 DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-search-${VERSION}.zip" "$env:Temp\FusionAuth-search.zip" "$env:UserProfile\FusionAuth"
 
-New-Item -Force -Path "$env:UserProfile/FusionAuth/fusionAuth-app" -ItemType SymbolicLink -Value "$env:UserProfile/FusionAuth/fusionauth-app-${VERSION}"
-New-Item -Force -Path "$env:UserProfile/FusionAuth/fusionAuth-search" -ItemType SymbolicLink -Value "$env:UserProfile/FusionAuth/fusionauth-search-${VERSION}"
+if (Test-Path "$env:UserProfile\FusionAuth\fusionAuth-app") {
+    Remove-Item -Force -Recurse "$env:UserProfile\FusionAuth\fusionAuth-app"
+}
+if (Test-Path "$env:UserProfile\FusionAuth\fusionAuth-search") {
+    Remove-Item -Force -Recurse "$env:UserProfile\FusionAuth\fusionAuth-search"
+}
+
+Move-Item -Path "$env:UserProfile\FusionAuth\fusionAuth-app-${VERSION}" -Destination "$env:UserProfile\FusionAuth\fusionAuth-app"
+Move-Item -Path "$env:UserProfile\FusionAuth\fusionAuth-search-${VERSION}" -Destination "$env:UserProfile\FusionAuth\fusionAuth-search"
 
 # Restore old setting
 $erroractionpreference = $old_erroractionpreference # Reset $erroractionpreference to original value

@@ -6,20 +6,20 @@ RSpec.configure do |c|
   end
 end
 
-describe package('passport-backend') do
+describe package('fusionauth-app') do
   it { should be_installed }
 end
 
-describe service('passport-backend') do
+describe service('fusionauth-app') do
   it { should_not be_enabled }
   it { should_not be_running }
 end
 
-describe package('passport-search-engine') do
+describe package('fusionauth-search') do
   it { should be_installed }
 end
 
-describe service('passport-search-engine') do
+describe service('fusionauth-search') do
   it { should_not be_enabled }
   it { should_not be_running }
 end

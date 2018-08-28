@@ -39,13 +39,13 @@ function DownloadAndExpandZip($uri, $tempFile, $destination) {
 
 Write-Output "Getting latest version"
 
-$VERSION= Invoke-WebRequest -Uri https://www.inversoft.com/latest-passport-version
+$VERSION= Invoke-WebRequest -Uri https://www.inversoft.com/api/fusionauth/latest-version
 
-DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/passport/${VERSION}/passport-backend-${VERSION}.zip" "$env:Temp\FusionAuth-backend.zip" "$env:UserProfile\FusionAuth"
-DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/passport/${VERSION}/passport-search-engine-${VERSION}.zip" "$env:Temp\FusionAuth-search-engine.zip" "$env:UserProfile\FusionAuth"
+DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-app-${VERSION}.zip" "$env:Temp\FusionAuth-app.zip" "$env:UserProfile\FusionAuth"
+DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-search-${VERSION}.zip" "$env:Temp\FusionAuth-search.zip" "$env:UserProfile\FusionAuth"
 
-New-Item -Force -Path "$env:UserProfile/FusionAuth/fusionAuth-backend" -ItemType SymbolicLink -Value "$env:UserProfile/FusionAuth/passport-backend-${VERSION}"
-New-Item -Force -Path "$env:UserProfile/FusionAuth/fusionAuth-search-engine" -ItemType SymbolicLink -Value "$env:UserProfile/FusionAuth/passport-search-engine-${VERSION}"
+New-Item -Force -Path "$env:UserProfile/FusionAuth/fusionAuth-app" -ItemType SymbolicLink -Value "$env:UserProfile/FusionAuth/fusionauth-app-${VERSION}"
+New-Item -Force -Path "$env:UserProfile/FusionAuth/fusionAuth-search" -ItemType SymbolicLink -Value "$env:UserProfile/FusionAuth/fusionauth-search-${VERSION}"
 
 # Restore old setting
 $erroractionpreference = $old_erroractionpreference # Reset $erroractionpreference to original value

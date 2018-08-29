@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/fusionAuth-install.iml" filepath="$PROJECT_DIR$/fusionAuth-install.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fusionauth-install.iml" filepath="$PROJECT_DIR$/fusionauth-install.iml" />
     </modules>
   </component>
 </project>

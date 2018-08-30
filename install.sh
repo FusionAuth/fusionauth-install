@@ -7,7 +7,7 @@ fi
 
 FORCE_ZIP=0
 SUFFIX=""
-TARGET_DIR=${TARGET_DIR:-${HOME}/fusionAuth} # Default to home/fusionAuth but keep any existing value.
+TARGET_DIR=${TARGET_DIR:-${HOME}/fusionauth} # Default to home/fusionauth but keep any existing value.
 VERSION=$(curl https://www.inversoft.com/api/fusionauth/latest-version)
 
 print_usage() {
@@ -50,34 +50,34 @@ install_linux() {
 install_deb() {
   echo "Installing deb packages"
 
-  curl -fSL -o /tmp/fusionAuth-app.deb "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-app_${VERSION}-1_all.deb"
-  curl -fSL -o /tmp/fusionAuth-search.deb "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-search_${VERSION}-1_all.deb"
+  curl -fSL -o /tmp/fusionauth-app.deb "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-app_${VERSION}-1_all.deb"
+  curl -fSL -o /tmp/fusionauth-search.deb "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-search_${VERSION}-1_all.deb"
 
-  sudo dpkg -i /tmp/fusionAuth-app.deb /tmp/fusionAuth-search.deb
+  sudo dpkg -i /tmp/fusionauth-app.deb /tmp/fusionauth-search.deb
 }
 
 install_rpm() {
   echo "Installing rpm packages"
 
-  curl -fSL -o /tmp/fusionAuth-app.rpm "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-app-${VERSION}-1.noarch.rpm"
-  curl -fSL -o /tmp/fusionAuth-search.rpm "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-search-${VERSION}-1.noarch.rpm"
+  curl -fSL -o /tmp/fusionauth-app.rpm "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-app-${VERSION}-1.noarch.rpm"
+  curl -fSL -o /tmp/fusionauth-search.rpm "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-search-${VERSION}-1.noarch.rpm"
 
-  sudo rpm -i /tmp/fusionAuth-app.rpm /tmp/fusionAuth-search.rpm
+  sudo rpm -i /tmp/fusionauth-app.rpm /tmp/fusionauth-search.rpm
 }
 
 install_zip() {
   echo "Installing zip packages to ${TARGET_DIR}"
 
-  curl -fSL -o /tmp/fusionAuth-app.zip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-app-${SUFFIX}${VERSION}.zip"
-  curl -fSL -o /tmp/fusionAuth-search.zip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-search-${SUFFIX}${VERSION}.zip"
+  curl -fSL -o /tmp/fusionauth-app.zip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-app-${SUFFIX}${VERSION}.zip"
+  curl -fSL -o /tmp/fusionauth-search.zip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-search-${SUFFIX}${VERSION}.zip"
 
   mkdir -p ${TARGET_DIR}
 
-  unzip -n /tmp/fusionAuth-app.zip -d ${TARGET_DIR}
-  unzip -n /tmp/fusionAuth-search.zip -d ${TARGET_DIR}
+  unzip -n /tmp/fusionauth-app.zip -d ${TARGET_DIR}
+  unzip -n /tmp/fusionauth-search.zip -d ${TARGET_DIR}
 
-  mv ${TARGET_DIR}/fusionauth-app-${VERSION} ${TARGET_DIR}/fusionAuth-app
-  mv ${TARGET_DIR}/fusionauth-search-${VERSION} ${TARGET_DIR}/fusionAuth-search
+  mv ${TARGET_DIR}/fusionauth-app-${VERSION} ${TARGET_DIR}/fusionauth-app
+  mv ${TARGET_DIR}/fusionauth-search-${VERSION} ${TARGET_DIR}/fusionauth-search
 }
 
 case $(uname -s) in

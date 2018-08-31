@@ -56,8 +56,5 @@ if (Test-Path "$CURRENT_DIRECTORY\fusionauth\fusionauth-search") {
     Remove-Item -Force -Recurse "$CURRENT_DIRECTORY\fusionauth\fusionauth-search"
 }
 
-Move-Item -Path "$CURRENT_DIRECTORY\fusionauth\fusionauth-app-${VERSION}" -Destination "$CURRENT_DIRECTORY\fusionauth\fusionauth-app"
-Move-Item -Path "$CURRENT_DIRECTORY\fusionauth\fusionauth-search-${VERSION}" -Destination "$CURRENT_DIRECTORY\fusionauth\fusionauth-search"
-
 # Restore old setting
 $erroractionpreference = $old_erroractionpreference # Reset $erroractionpreference to original value

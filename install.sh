@@ -5,9 +5,10 @@ if ! hash curl > /dev/null 2>&1; then
     exit 1
 fi
 
+BASE_URL="https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth"
 FORCE_ZIP=0
-SUFFIX=""
-TARGET_DIR=${TARGET_DIR:-${HOME}/fusionauth} # Default to home/fusionauth but keep any existing value.
+# Download to the current working directory
+TARGET_DIR=${TARGET_DIR:-$(pwd)/fusionauth}
 VERSION=$(curl https://www.inversoft.com/api/fusionauth/latest-version)
 
 print_usage() {
@@ -50,8 +51,8 @@ install_linux() {
 install_deb() {
   echo "Installing deb packages"
 
-  curl -fSL -o /tmp/fusionauth-app.deb "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-app_${VERSION}-1_all.deb"
-  curl -fSL -o /tmp/fusionauth-search.deb "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-search_${VERSION}-1_all.deb"
+  curl -fSL -o /tmp/fusionauth-app.deb "${BASE_URL}/${VERSION}/fusionauth-app_${VERSION}-1_all.deb"
+  curl -fSL -o /tmp/fusionauth-search.deb "${BASE_URL}/${VERSION}/fusionauth-search_${VERSION}-1_all.deb"
 
   sudo dpkg -i /tmp/fusionauth-app.deb /tmp/fusionauth-search.deb
 }
@@ -59,17 +60,17 @@ install_deb() {
 install_rpm() {
   echo "Installing rpm packages"
 
-  curl -fSL -o /tmp/fusionauth-app.rpm "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-app-${VERSION}-1.noarch.rpm"
-  curl -fSL -o /tmp/fusionauth-search.rpm "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-search-${VERSION}-1.noarch.rpm"
+  curl -fSL -o /tmp/fusionauth-app.rpm "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION}-1.noarch.rpm"
+  curl -fSL -o /tmp/fusionauth-search.rpm "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}-1.noarch.rpm"
 
   sudo rpm -i /tmp/fusionauth-app.rpm /tmp/fusionauth-search.rpm
 }
 
 install_zip() {
-  echo "Installing zip packages to ${TARGET_DIR}"
+  echo "Installing zip packages"
 
-  curl -fSL -o /tmp/fusionauth-app.zip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-app-${SUFFIX}${VERSION}.zip"
-  curl -fSL -o /tmp/fusionauth-search.zip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-search-${SUFFIX}${VERSION}.zip"
+  curl -fSL -o /tmp/fusionauth-app.zip "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION}.zip"
+  curl -fSL -o /tmp/fusionauth-search.zip "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}.zip"
 
   mkdir -p ${TARGET_DIR}
 
@@ -82,7 +83,7 @@ install_zip() {
 
 case $(uname -s) in
     Linux*)     install_linux;;
-    Darwin*)    SUFFIX="macos-"; install_zip;;
+    Darwin*)    install_zip;;
     *)          echo "Unsupported platform, will attempt the zip install"; install_zip;;
 esac
 

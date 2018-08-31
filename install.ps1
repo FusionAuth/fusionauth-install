@@ -39,20 +39,22 @@ function DownloadAndExpandZip($uri, $tempFile, $destination) {
 
 Write-Output "Getting latest version"
 
-$VERSION= Invoke-WebRequest -Uri https://www.inversoft.com/api/fusionauth/latest-version
+$VERSION = Invoke-WebRequest -Uri https://www.inversoft.com/api/fusionauth/latest-version
+$CURRENT_DIRECTORY=(Get-Item -Path ".\").FullName
+$HOME_DIR = $env.UserProfile
 
 DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-app-${VERSION}.zip" "$env:Temp\fusionauth-app.zip" "$env:UserProfile\fusionauth"
 DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-search-${VERSION}.zip" "$env:Temp\fusionauth-search.zip" "$env:UserProfile\fusionauth"
 
-if (Test-Path "$env:UserProfile\fusionauth\fusionauth-app") {
-    Remove-Item -Force -Recurse "$env:UserProfile\fusionauth\fusionauth-app"
+if (Test-Path "$CURRENT_DIRECTORY\fusionauth\fusionauth-app") {
+    Remove-Item -Force -Recurse "$CURRENT_DIRECTORY\fusionauth\fusionauth-app"
 }
-if (Test-Path "$env:UserProfile\fusionauth\fusionauth-search") {
-    Remove-Item -Force -Recurse "$env:UserProfile\fusionauth\fusionauth-search"
+if (Test-Path "$CURRENT_DIRECTORY\fusionauth\fusionauth-search") {
+    Remove-Item -Force -Recurse "$CURRENT_DIRECTORY\fusionauth\fusionauth-search"
 }
 
-Move-Item -Path "$env:UserProfile\fusionauth\fusionauth-app-${VERSION}" -Destination "$env:UserProfile\fusionauth\fusionauth-app"
-Move-Item -Path "$env:UserProfile\fusionauth\fusionauth-search-${VERSION}" -Destination "$env:UserProfile\fusionauth\fusionauth-search"
+Move-Item -Path "$CURRENT_DIRECTORY\fusionauth\fusionauth-app-${VERSION}" -Destination "$CURRENT_DIRECTORY\fusionauth\fusionauth-app"
+Move-Item -Path "$CURRENT_DIRECTORY\fusionauth\fusionauth-search-${VERSION}" -Destination "$CURRENT_DIRECTORY\fusionauth\fusionauth-search"
 
 # Restore old setting
 $erroractionpreference = $old_erroractionpreference # Reset $erroractionpreference to original value

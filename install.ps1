@@ -38,7 +38,7 @@ function DownloadAndExpandZip($uri, $tempFile, $destination) {
 }
 
 $VERSION = Invoke-WebRequest -Uri https://www.inversoft.com/api/fusionauth/latest-version
-$CURRENT_DIRECTORY=(Get-Item -Path ".\").FullName
+$CURRENT_DIRECTORY=(Get-Item -Path ".\").FullName.TrimEnd("\")
 $HOME_DIR = $env.UserProfile
 
 Write-Output "Install FusionAuth version ${VERSION}"

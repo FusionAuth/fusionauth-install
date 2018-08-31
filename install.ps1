@@ -37,11 +37,11 @@ function DownloadAndExpandZip($uri, $tempFile, $destination) {
     robocopy "$env:Temp/fusionauth" $destination /E /XC /XN /XO /NFL /NDL /NJH /NS /NC
 }
 
-Write-Output "Getting latest version"
-
 $VERSION = Invoke-WebRequest -Uri https://www.inversoft.com/api/fusionauth/latest-version
 $CURRENT_DIRECTORY=(Get-Item -Path ".\").FullName
 $HOME_DIR = $env.UserProfile
+
+Write-Output "Install FusionAuth version ${VERSION}"
 
 DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-app-${VERSION}.zip" "$env:Temp\fusionauth-app.zip" "$CURRENT_DIRECTORY\fusionauth"
 DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-search-${VERSION}.zip" "$env:Temp\fusionauth-search.zip" "$CURRENT_DIRECTORY\fusionauth"

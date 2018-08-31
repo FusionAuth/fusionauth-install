@@ -43,8 +43,10 @@ $VERSION = Invoke-WebRequest -Uri https://www.inversoft.com/api/fusionauth/lates
 $CURRENT_DIRECTORY=(Get-Item -Path ".\").FullName
 $HOME_DIR = $env.UserProfile
 
-DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-app-${VERSION}.zip" "$env:Temp\fusionauth-app.zip" "$env:UserProfile\fusionauth"
-DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-search-${VERSION}.zip" "$env:Temp\fusionauth-search.zip" "$env:UserProfile\fusionauth"
+Write-Output "Downloading to ${CURRENT_DIRECTORY}"
+
+DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-app-${VERSION}.zip" "$env:Temp\fusionauth-app.zip" "$CURRENT_DIRECTORY\fusionauth"
+DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-search-${VERSION}.zip" "$env:Temp\fusionauth-search.zip" "$CURRENT_DIRECTORY\fusionauth"
 
 if (Test-Path "$CURRENT_DIRECTORY\fusionauth\fusionauth-app") {
     Remove-Item -Force -Recurse "$CURRENT_DIRECTORY\fusionauth\fusionauth-app"

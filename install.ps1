@@ -38,6 +38,9 @@ function DownloadAndExpandZip($uri, $tempFile, $destination) {
 }
 
 $VERSION = Invoke-WebRequest -Uri https://www.inversoft.com/api/fusionauth/latest-version
+# Trim the trailing \ since we add it when we set the destination directory, and it may come back on the FullName property
+#  > C:\> (Get-Item -Path ".\").FullName       => C:\
+#  > C:\foo> (Get-Item -Path ".\").FullName    => C:\foo
 $CURRENT_DIRECTORY=(Get-Item -Path ".\").FullName.TrimEnd("\")
 $HOME_DIR = $env.UserProfile
 

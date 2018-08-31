@@ -4,7 +4,7 @@ Software should be easy to install, so we've provided you with some shortcuts to
 
 ### Linux or macOS
 ```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.sh)"
+sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.sh | sh"
 ```
 
 

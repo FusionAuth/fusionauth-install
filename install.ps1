@@ -14,7 +14,7 @@ if(($PSVersionTable.PSVersion.Major) -lt 5) {
 }
 
 function DownloadAndExpandZip($uri, $tempFile, $destination) {
-    Write-Output "Downloading archive"
+    Write-Output "Downloading archive, destination ${destination}"
 
     if (Get-module BitsTransfer) {
         Start-BitsTransfer -Source $uri -Destination $tempFile
@@ -42,8 +42,6 @@ Write-Output "Getting latest version"
 $VERSION = Invoke-WebRequest -Uri https://www.inversoft.com/api/fusionauth/latest-version
 $CURRENT_DIRECTORY=(Get-Item -Path ".\").FullName
 $HOME_DIR = $env.UserProfile
-
-Write-Output "Downloading to ${CURRENT_DIRECTORY}"
 
 DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-app-${VERSION}.zip" "$env:Temp\fusionauth-app.zip" "$CURRENT_DIRECTORY\fusionauth"
 DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-search-${VERSION}.zip" "$env:Temp\fusionauth-search.zip" "$CURRENT_DIRECTORY\fusionauth"

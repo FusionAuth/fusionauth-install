@@ -76,9 +76,6 @@ install_zip() {
 
   unzip -n /tmp/fusionauth-app.zip -d ${TARGET_DIR}
   unzip -n /tmp/fusionauth-search.zip -d ${TARGET_DIR}
-
-  mv ${TARGET_DIR}/fusionauth-app-${VERSION} ${TARGET_DIR}/fusionauth-app
-  mv ${TARGET_DIR}/fusionauth-search-${VERSION} ${TARGET_DIR}/fusionauth-search
 }
 
 case $(uname -s) in

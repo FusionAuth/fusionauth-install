@@ -72,6 +72,14 @@ install_zip() {
   curl -fSL -o /tmp/fusionauth-app.zip "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION}.zip"
   curl -fSL -o /tmp/fusionauth-search.zip "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}.zip"
 
+  # Remove the existing directories (We won't overwrite otherwise)
+  if [[ -d ${TARGET_DIR}/fusionauth-app ]]; then
+    rm -rf ${TARGET_DIR}/fusionauth-app
+  fi
+  if [[ -d ${TARGET_DIR}/fusionauth-search ]]; then
+    rm -rf ${TARGET_DIR}/fusionauth-search
+  fi
+
   mkdir -p ${TARGET_DIR}
 
   unzip -n /tmp/fusionauth-app.zip -d ${TARGET_DIR}

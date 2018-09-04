@@ -38,52 +38,54 @@ do
 done
 
 install_linux() {
-  # Detect dpkg and rpm, fallback to zip
-  if [[ ${FORCE_ZIP} != 1 ]] && hash dpkg > /dev/null 2>&1; then
-    install_deb;
-  elif [[ ${FORCE_ZIP} != 1 ]] && hash rpm > /dev/null 2>&1; then
-    install_rpm;
-  else
-    install_zip;
-  fi
+    # Detect dpkg and rpm, fallback to zip
+    if [[ ${FORCE_ZIP} != 1 ]] && hash dpkg > /dev/null 2>&1; then
+        install_deb;
+    elif [[ ${FORCE_ZIP} != 1 ]] && hash rpm > /dev/null 2>&1; then
+        install_rpm;
+    else
+        install_zip;
+    fi
 }
 
 install_deb() {
-  echo "Installing deb packages"
+    echo "Installing deb packages"
 
-  curl -fSL -o /tmp/fusionauth-app.deb "${BASE_URL}/${VERSION}/fusionauth-app_${VERSION}-1_all.deb"
-  curl -fSL -o /tmp/fusionauth-search.deb "${BASE_URL}/${VERSION}/fusionauth-search_${VERSION}-1_all.deb"
+    curl -fSL -o /tmp/fusionauth-app.deb "${BASE_URL}/${VERSION}/fusionauth-app_${VERSION}-1_all.deb"
+    curl -fSL -o /tmp/fusionauth-search.deb "${BASE_URL}/${VERSION}/fusionauth-search_${VERSION}-1_all.deb"
 
-  sudo dpkg -i /tmp/fusionauth-app.deb /tmp/fusionauth-search.deb
+    sudo dpkg -i /tmp/fusionauth-app.deb /tmp/fusionauth-search.deb
 }
 
 install_rpm() {
-  echo "Installing rpm packages"
+    echo "Installing rpm packages"
 
-  curl -fSL -o /tmp/fusionauth-app.rpm "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION}-1.noarch.rpm"
-  curl -fSL -o /tmp/fusionauth-search.rpm "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}-1.noarch.rpm"
+    curl -fSL -o /tmp/fusionauth-app.rpm "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION}-1.noarch.rpm"
+    curl -fSL -o /tmp/fusionauth-search.rpm "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}-1.noarch.rpm"
 
-  sudo rpm -i /tmp/fusionauth-app.rpm /tmp/fusionauth-search.rpm
+    sudo rpm -i /tmp/fusionauth-app.rpm /tmp/fusionauth-search.rpm
 }
 
 install_zip() {
-  echo "Installing zip packages"
+    echo "Installing zip packages"
 
-  curl -fSL -o /tmp/fusionauth-app.zip "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION}.zip"
-  curl -fSL -o /tmp/fusionauth-search.zip "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}.zip"
+    curl -fSL -o /tmp/fusionauth-app.zip "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION}.zip"
+    curl -fSL -o /tmp/fusionauth-search.zip "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}.zip"
 
-  # Remove the existing directories (We won't overwrite otherwise)
-  if [[ -d ${TARGET_DIR}/fusionauth-app ]]; then
-    rm -rf ${TARGET_DIR}/fusionauth-app
-  fi
-  if [[ -d ${TARGET_DIR}/fusionauth-search ]]; then
-    rm -rf ${TARGET_DIR}/fusionauth-search
-  fi
+    if [[ ! -d ${TARGET_DIR} ]]; then
+         mkdir -p ${TARGET_DIR}
+    else
+         # Remove the existing directories (We won't overwrite otherwise)
+         if [[ -d ${TARGET_DIR}/fusionauth-app ]]; then
+             rm -rf ${TARGET_DIR}/fusionauth-app
+         fi
+         if [[ -d ${TARGET_DIR}/fusionauth-search ]]; then
+             rm -rf ${TARGET_DIR}/fusionauth-search
+         fi
+    fi
 
-  mkdir -p ${TARGET_DIR}
-
-  unzip -n /tmp/fusionauth-app.zip -d ${TARGET_DIR}
-  unzip -n /tmp/fusionauth-search.zip -d ${TARGET_DIR}
+    unzip -n /tmp/fusionauth-app.zip -d ${TARGET_DIR}
+    unzip -n /tmp/fusionauth-search.zip -d ${TARGET_DIR}
 }
 
 case $(uname -s) in

@@ -39,9 +39,9 @@ done
 
 install_linux() {
     # Detect dpkg and rpm, fallback to zip
-    if [[ ${FORCE_ZIP} != 1 ]] && hash dpkg > /dev/null 2>&1; then
+    if [ "${FORCE_ZIP}" -ne "1" ] && hash dpkg > /dev/null 2>&1; then
         install_deb;
-    elif [[ ${FORCE_ZIP} != 1 ]] && hash rpm > /dev/null 2>&1; then
+    elif [ "${FORCE_ZIP}" -ne "1" ] && hash rpm > /dev/null 2>&1; then
         install_rpm;
     else
         install_zip;
@@ -67,19 +67,24 @@ install_rpm() {
 }
 
 install_zip() {
+    if ! hash unzip > /dev/null 2>&1; then
+        echo "unzip is required to unzip the zip archives. Install unzip and try again."
+        exit 1
+    fi
+
     echo "Installing zip packages"
 
     curl -fSL -o /tmp/fusionauth-app.zip "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION}.zip"
     curl -fSL -o /tmp/fusionauth-search.zip "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}.zip"
 
-    if [[ ! -d ${TARGET_DIR} ]]; then
+    if [ ! -d ${TARGET_DIR} ]; then
          mkdir -p ${TARGET_DIR}
     else
          # Remove the existing directories (We won't overwrite otherwise)
-         if [[ -d ${TARGET_DIR}/fusionauth-app ]]; then
+         if [ -d ${TARGET_DIR}/fusionauth-app ]; then
              rm -rf ${TARGET_DIR}/fusionauth-app
          fi
-         if [[ -d ${TARGET_DIR}/fusionauth-search ]]; then
+         if [ -d ${TARGET_DIR}/fusionauth-search ]; then
              rm -rf ${TARGET_DIR}/fusionauth-search
          fi
     fi

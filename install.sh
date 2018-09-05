@@ -55,6 +55,10 @@ install_deb() {
     curl -fSL -o /tmp/fusionauth-search.deb "${BASE_URL}/${VERSION}/fusionauth-search_${VERSION}-1_all.deb"
 
     sudo dpkg -i /tmp/fusionauth-app.deb /tmp/fusionauth-search.deb
+
+    echo "To start FusionAuth run the following commands"
+    echo " >  sudo service fusionauth-search start"
+    echo " >  sudo service fusionauth-app start"
 }
 
 install_rpm() {
@@ -64,6 +68,10 @@ install_rpm() {
     curl -fSL -o /tmp/fusionauth-search.rpm "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}-1.noarch.rpm"
 
     sudo rpm -i /tmp/fusionauth-app.rpm /tmp/fusionauth-search.rpm
+
+    echo "To start FusionAuth run the following commands"
+    echo " >  sudo service fusionauth-search start"
+    echo " >  sudo service fusionauth-app start"
 }
 
 install_zip() {
@@ -86,8 +94,11 @@ install_zip() {
          rm -rf ${TARGET_DIR}/bin
     fi
 
-    unzip -n /tmp/fusionauth-app.zip -d ${TARGET_DIR}
-    unzip -n /tmp/fusionauth-search.zip -d ${TARGET_DIR}
+    unzip -nq /tmp/fusionauth-app.zip -d ${TARGET_DIR}
+    unzip -nq /tmp/fusionauth-search.zip -d ${TARGET_DIR}
+
+    echo "To start FusionAuth run the following command"
+    echo " >  ${TARGET_DIR}/bin/startup.sh"
 }
 
 case $(uname -s) in
@@ -96,4 +107,9 @@ case $(uname -s) in
     *)          echo "Unsupported platform, will attempt the zip install"; install_zip;;
 esac
 
-echo "Done. Time for tacos."
+echo ""
+echo " Install is complete. Time for tacos."
+echo " To begin, access FusionAuth by opening a browser to http://localhost:9011"
+echo " If you're looking for documentation, click here : https://fusionauth.io/docs"
+echo ""
+echo "Thank you have a nice day."

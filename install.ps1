@@ -51,6 +51,9 @@ if (Test-Path "$CURRENT_DIRECTORY\fusionauth\fusionauth-app") {
 if (Test-Path "$CURRENT_DIRECTORY\fusionauth\fusionauth-search") {
     Remove-Item -Force -Recurse "$CURRENT_DIRECTORY\fusionauth\fusionauth-search"
 }
+if (Test-Path "$CURRENT_DIRECTORY\fusionauth\bin") {
+    Remove-Item -Force -Recurse "$CURRENT_DIRECTORY\fusionauth\bin"
+}
 
 DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-app-${VERSION}.zip" "$env:Temp\fusionauth-app.zip" "$CURRENT_DIRECTORY\fusionauth"
 DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-search-${VERSION}.zip" "$env:Temp\fusionauth-search.zip" "$CURRENT_DIRECTORY\fusionauth"

@@ -81,12 +81,9 @@ install_zip() {
          mkdir -p ${TARGET_DIR}
     else
          # Remove the existing directories (We won't overwrite otherwise)
-         if [ -d ${TARGET_DIR}/fusionauth-app ]; then
-             rm -rf ${TARGET_DIR}/fusionauth-app
-         fi
-         if [ -d ${TARGET_DIR}/fusionauth-search ]; then
-             rm -rf ${TARGET_DIR}/fusionauth-search
-         fi
+         rm -rf ${TARGET_DIR}/fusionauth-app
+         rm -rf ${TARGET_DIR}/fusionauth-search
+         rm -rf ${TARGET_DIR}/bin
     fi
 
     unzip -n /tmp/fusionauth-app.zip -d ${TARGET_DIR}

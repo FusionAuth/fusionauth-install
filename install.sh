@@ -59,9 +59,9 @@ install_deb() {
     echo ""
     echo "Install is complete. Time for tacos."
     echo ""
-    echo "1. To start FusionAuth run the following commands"
-    echo " sudo service fusionauth-search start"
-    echo " sudo service fusionauth-app start"
+    echo " 1. To start FusionAuth run the following commands"
+    echo "    sudo service fusionauth-search start"
+    echo "    sudo service fusionauth-app start"
 }
 
 install_rpm() {
@@ -75,9 +75,9 @@ install_rpm() {
     echo ""
     echo "Install is complete. Time for tacos."
     echo ""
-    echo "1. To start FusionAuth run the following commands"
-    echo " sudo service fusionauth-search start"
-    echo " sudo service fusionauth-app start"
+    echo " 1. To start FusionAuth run the following commands"
+    echo "    sudo service fusionauth-search start"
+    echo "    sudo service fusionauth-app start"
 }
 
 install_zip() {
@@ -106,8 +106,8 @@ install_zip() {
     echo ""
     echo "Install is complete. Time for tacos."
     echo ""
-    echo "1. To start FusionAuth run the following command"
-    echo " ${TARGET_DIR}/bin/startup.sh"
+    echo " 1. To start FusionAuth run the following command"
+    echo "    ${TARGET_DIR}/bin/startup.sh"
 }
 
 case $(uname -s) in
@@ -117,8 +117,8 @@ case $(uname -s) in
 esac
 
 echo ""
-echo "2. To begin, access FusionAuth by opening a browser to http://localhost:9011"
+echo " 2. To begin, access FusionAuth by opening a browser to http://localhost:9011"
 echo ""
-echo "3. If you're looking for documentation, open your browser and navigate to https://fusionauth.io/docs"
+echo " 3. If you're looking for documentation, open your browser and navigate to https://fusionauth.io/docs"
 echo ""
 echo "Thank you have a nice day."

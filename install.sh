@@ -107,7 +107,7 @@ install_zip() {
     echo "Install is complete."
     echo ""
     echo "1. To start FusionAuth run the following command"
-    echo " >  ${TARGET_DIR}/bin/startup.sh"
+    echo " > ${TARGET_DIR}/bin/startup.sh"
 }
 
 case $(uname -s) in
@@ -117,7 +117,8 @@ case $(uname -s) in
 esac
 
 echo ""
-echo "2. To begin, access FusionAuth by opening a browser to http://localhost:9011"
-echo "3. If you're looking for documentation, click here : https://fusionauth.io/docs"
+echo -e "2. To begin, access FusionAuth by opening a browser to \e]8;;http://localhost:9011\ahttp://localhost:9011\e]8;;\a"
+echo ""
+echo -e "3. If you're looking for documentation, open your browser and navigate to \e]8;;https://fusionauth.io/docs\ahttps://fusionauth.io/docs\e]8;;\a"
 echo ""
 echo "Thank you have a nice day."

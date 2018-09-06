@@ -55,8 +55,22 @@ if (Test-Path "$CURRENT_DIRECTORY\fusionauth\bin") {
     Remove-Item -Force -Recurse "$CURRENT_DIRECTORY\fusionauth\bin"
 }
 
+echo "Installing zip packages"
+
 DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-app-${VERSION}.zip" "$env:Temp\fusionauth-app.zip" "$CURRENT_DIRECTORY\fusionauth"
 DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-search-${VERSION}.zip" "$env:Temp\fusionauth-search.zip" "$CURRENT_DIRECTORY\fusionauth"
+
+Write-Output ""
+Write-Output "Install is complete. Time for tacos."
+Write-Output ""
+Write-Output " 1. To start FusionAuth run the following command"
+Write-Output "    .\fusionauth\bin\startup.bat"
+Write-Output ""
+Write-Output " 2. To begin, access FusionAuth by opening a browser to http://localhost:9011"
+Write-Output ""
+Write-Output " 3. If you're looking for documentation, open your browser and navigate to https://fusionauth.io/docs"
+Write-Output ""
+Write-Output "Thank you have a nice day."
 
 # Restore old setting
 $erroractionpreference = $old_erroractionpreference # Reset $erroractionpreference to original value

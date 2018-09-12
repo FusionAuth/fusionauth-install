@@ -49,8 +49,8 @@ install_linux() {
 
 install_deb() {
     echo "Downloading RPM packages"
-    curl -fSL# -o /tmp/fusionauth-app.deb "${BASE_URL}/${VERSION}/fusionauth-app_${VERSION}-1_all.deb"
-    curl -fSL# -o /tmp/fusionauth-search.deb "${BASE_URL}/${VERSION}/fusionauth-search_${VERSION}-1_all.deb"
+    curl -fSL --progress-bar -o /tmp/fusionauth-app.deb "${BASE_URL}/${VERSION}/fusionauth-app_${VERSION}-1_all.deb"
+    curl -fSL --progress-bar -o /tmp/fusionauth-search.deb "${BASE_URL}/${VERSION}/fusionauth-search_${VERSION}-1_all.deb"
 
     echo "Installing RPM packages"
     sudo dpkg -i /tmp/fusionauth-app.deb /tmp/fusionauth-search.deb
@@ -71,8 +71,8 @@ install_deb() {
 install_rpm() {
     echo "Downloading RPM packages"
 
-    curl -fSL# -o /tmp/fusionauth-app.rpm "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION}-1.noarch.rpm"
-    curl -fSL# -o /tmp/fusionauth-search.rpm "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}-1.noarch.rpm"
+    curl -fSL --progress-bar -o /tmp/fusionauth-app.rpm "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION}-1.noarch.rpm"
+    curl -fSL --progress-bar -o /tmp/fusionauth-search.rpm "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}-1.noarch.rpm"
 
     echo "Installing rpm packages"
     sudo rpm -i /tmp/fusionauth-app.rpm /tmp/fusionauth-search.rpm
@@ -98,8 +98,8 @@ install_zip() {
 
     echo "Downloading zip packages"
 
-    curl -fSL# -o /tmp/fusionauth-app.zip "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION}.zip"
-    curl -fSL# -o /tmp/fusionauth-search.zip "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}.zip"
+    curl -fSL --progress-bar -o /tmp/fusionauth-app.zip "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION}.zip"
+    curl -fSL --progress-bar -o /tmp/fusionauth-search.zip "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}.zip"
 
     if [ ! -d ${TARGET_DIR} ]; then
          mkdir -p ${TARGET_DIR}

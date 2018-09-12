@@ -9,12 +9,11 @@ BASE_URL="https://storage.googleapis.com/inversoft_products_j098230498/products/
 FORCE_ZIP=0
 # Download to the current working directory
 TARGET_DIR=${TARGET_DIR:-$(pwd)/fusionauth}
-VERSION=$(curl https://www.inversoft.com/api/fusionauth/latest-version)
 
 print_usage() {
     echo "FusionAuth installer"
     echo ""
-    echo "./install [options]"
+    echo "./install.sh [options]"
     echo ""
     echo "options:"
     echo "-z   Force install using a zip file even if a supported package system is detected"
@@ -49,12 +48,17 @@ install_linux() {
 }
 
 install_deb() {
-    echo "Installing deb packages"
+    echo "Downloading RPM packages"
+    curl -fSL# -o /tmp/fusionauth-app.deb "${BASE_URL}/${VERSION}/fusionauth-app_${VERSION}-1_all.deb"
+    curl -fSL# -o /tmp/fusionauth-search.deb "${BASE_URL}/${VERSION}/fusionauth-search_${VERSION}-1_all.deb"
 
-    curl -fSL -o /tmp/fusionauth-app.deb "${BASE_URL}/${VERSION}/fusionauth-app_${VERSION}-1_all.deb"
-    curl -fSL -o /tmp/fusionauth-search.deb "${BASE_URL}/${VERSION}/fusionauth-search_${VERSION}-1_all.deb"
-
+    echo "Installing RPM packages"
     sudo dpkg -i /tmp/fusionauth-app.deb /tmp/fusionauth-search.deb
+
+    # Ensure we completed the sudo request
+    if [  $? -ne 0 ] ; then
+        exit 0;
+    fi
 
     echo ""
     echo "Install is complete. Time for tacos."
@@ -65,12 +69,18 @@ install_deb() {
 }
 
 install_rpm() {
+    echo "Downloading RPM packages"
+
+    curl -fSL# -o /tmp/fusionauth-app.rpm "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION}-1.noarch.rpm"
+    curl -fSL# -o /tmp/fusionauth-search.rpm "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}-1.noarch.rpm"
+
     echo "Installing rpm packages"
-
-    curl -fSL -o /tmp/fusionauth-app.rpm "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION}-1.noarch.rpm"
-    curl -fSL -o /tmp/fusionauth-search.rpm "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}-1.noarch.rpm"
-
     sudo rpm -i /tmp/fusionauth-app.rpm /tmp/fusionauth-search.rpm
+
+    # Ensure we completed the sudo request
+    if [  $? -ne 0 ] ; then
+        exit 0;
+    fi
 
     echo ""
     echo "Install is complete. Time for tacos."
@@ -86,10 +96,10 @@ install_zip() {
         exit 1
     fi
 
-    echo "Installing zip packages"
+    echo "Downloading zip packages"
 
-    curl -fSL -o /tmp/fusionauth-app.zip "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION}.zip"
-    curl -fSL -o /tmp/fusionauth-search.zip "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}.zip"
+    curl -fSL# -o /tmp/fusionauth-app.zip "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION}.zip"
+    curl -fSL# -o /tmp/fusionauth-search.zip "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}.zip"
 
     if [ ! -d ${TARGET_DIR} ]; then
          mkdir -p ${TARGET_DIR}
@@ -100,6 +110,8 @@ install_zip() {
          rm -rf ${TARGET_DIR}/bin
     fi
 
+    echo "Installing packages"
+
     unzip -nq /tmp/fusionauth-app.zip -d ${TARGET_DIR}
     unzip -nq /tmp/fusionauth-search.zip -d ${TARGET_DIR}
 
@@ -109,6 +121,9 @@ install_zip() {
     echo " 1. To start FusionAuth run the following command"
     echo "    ${TARGET_DIR}/bin/startup.sh"
 }
+
+# Get the latest version of FusionAuth
+VERSION=$(curl -s https://www.inversoft.com/api/fusionauth/latest-version)
 
 case $(uname -s) in
     Linux*)     install_linux;;

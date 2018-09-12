@@ -11,9 +11,14 @@ sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-instal
 ```
 
 #### Linux
-Download and install RPM or DEB packages, optionally ZIP packages
+Download and install RPM or DEB packages
 ```bash
 sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.sh | sh"
+```
+
+Download and install ZIP packages to current directory
+```bash
+sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.sh | sh -s - -z"
 ```
 
 #### Windows

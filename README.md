@@ -42,15 +42,19 @@ curl -o docker-compose.yml https://raw.githubusercontent.com/FusionAuth/fusionau
 
 #### Docker Images
 
-FusionAuth App Only
+FusionAuth App ([On Docker Hub](https://hub.docker.com/r/fusionauth/fusionauth-app/))
+
 ```
 docker pull fusionauth/fusionauth-app
 ```
 
-FusionAuth Search Only
+FusionAuth Search ([On Docker Hub](https://hub.docker.com/r/fusionauth/fusionauth-search/))
+
+
 ```
 docker pull fusionauth/fusionauth-search
 ```
+You may also use Elasticsearch directly, see docker-compose.yml for example. 
 
 ### Documentation
 https://fusionauth.io/docs

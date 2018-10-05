@@ -32,6 +32,7 @@ If you run into an error, you may need to change your execution policy. `Set-Exe
 
 ### Docker
 https://hub.docker.com/u/fusionauth/
+
 https://github.com/FusionAuth/fusionauth-containers
 
 #### Docker Compose

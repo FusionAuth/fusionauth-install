@@ -32,8 +32,14 @@ If you run into an error, you may need to change your execution policy. `Set-Exe
 
 ### Docker
 https://hub.docker.com/u/fusionauth/
-
 https://github.com/FusionAuth/fusionauth-containers
+
+#### Docker Compose
+```bash
+curl -o docker-compose.yml https://raw.githubusercontent.com/FusionAuth/fusionauth-containers/master/docker/fusionauth/docker-compose.yml && docker-compose up
+```
+
+#### Docker Images
 
 FusionAuth App Only
 ```
@@ -43,16 +49,6 @@ docker pull fusionauth/fusionauth-app
 FusionAuth Search Only
 ```
 docker pull fusionauth/fusionauth-search
-```
-
-FusionAuth App and Search in one container
-```
-docker pull fusionauth/fusionauth
-```
-
-FusionAuth App, Search and MySQL in one container
-```
-docker pull fusionauth/fusionauth-mysql
 ```
 
 ### Documentation

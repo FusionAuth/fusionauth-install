@@ -123,7 +123,7 @@ install_zip() {
 }
 
 # Get the latest version of FusionAuth
-VERSION=$(curl -s https://www.inversoft.com/api/fusionauth/latest-version)
+VERSION=$(curl -s https://license.inversoft.com/api/fusionauth/latest-version)
 
 case $(uname -s) in
     Linux*)     install_linux;;

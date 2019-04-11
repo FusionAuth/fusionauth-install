@@ -48,11 +48,11 @@ install_linux() {
 }
 
 install_deb() {
-    echo "Downloading RPM packages"
+    echo "Downloading deb packages"
     curl -fSL --progress-bar -o /tmp/fusionauth-app.deb "${BASE_URL}/${VERSION}/fusionauth-app_${VERSION}-1_all.deb"
     curl -fSL --progress-bar -o /tmp/fusionauth-search.deb "${BASE_URL}/${VERSION}/fusionauth-search_${VERSION}-1_all.deb"
 
-    echo "Installing RPM packages"
+    echo "Installing deb packages"
     sudo dpkg -i /tmp/fusionauth-app.deb /tmp/fusionauth-search.deb
 
     # Ensure we completed the sudo request

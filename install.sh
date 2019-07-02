@@ -75,7 +75,7 @@ install_rpm() {
     curl -fSL --progress-bar -o /tmp/fusionauth-search.rpm "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}-1.noarch.rpm"
 
     echo "Installing rpm packages"
-    sudo rpm -i /tmp/fusionauth-app.rpm /tmp/fusionauth-search.rpm
+    sudo rpm -U /tmp/fusionauth-app.rpm /tmp/fusionauth-search.rpm
 
     # Ensure we completed the sudo request
     if [  $? -ne 0 ] ; then

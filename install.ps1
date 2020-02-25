@@ -37,7 +37,7 @@ function DownloadAndExpandZip($uri, $tempFile, $destination) {
     robocopy "$env:Temp/fusionauth" $destination /E /XC /XN /XO /NFL /NDL /NJH /NS /NC
 }
 
-$VERSION = Invoke-WebRequest -UseBasicParsing -Uri https://license.inversoft.com/api/fusionauth/latest-version
+$VERSION = Invoke-WebRequest -UseBasicParsing -Uri https://metrics.fusionauth.io/api/latest-version
 # Trim the trailing \ since we add it when we set the destination directory, and it may come back on the FullName property
 #  > C:\> (Get-Item -Path ".\").FullName       => C:\
 #  > C:\foo> (Get-Item -Path ".\").FullName    => C:\foo

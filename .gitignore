@@ -65,3 +65,5 @@ fabric.properties
 .idea/httpRequests
 
 .idea/inspectionProfiles/
+
+.vagrant

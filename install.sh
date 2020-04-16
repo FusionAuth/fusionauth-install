@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 
+set -e
+
 if ! hash curl > /dev/null 2>&1; then
     echo "curl is required to download the packages and determine version. Install curl and try again."
     exit 1
 fi
 
 BASE_URL="https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth"
+#BASE_URL="http://bundles.local.fusionauth.io"
 FORCE_ZIP=0
 # Download to the current working directory
 TARGET_DIR=${TARGET_DIR:-$(pwd)/fusionauth}
@@ -124,6 +127,7 @@ install_zip() {
 
 # Get the latest version of FusionAuth
 VERSION=$(curl -s https://metrics.fusionauth.io/api/latest-version)
+#VERSION=1.16.0
 
 case $(uname -s) in
     Linux*)     install_linux;;

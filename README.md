@@ -59,4 +59,13 @@ You may also use Elasticsearch directly, see docker-compose.yml for example.
 ### Documentation
 https://fusionauth.io/docs
 
+## Development
 
+If you are interested in tweaking this file, your changes must work in both linux and windows (or more specifically centos, ubuntu, windows, and macos (whatever the lastest is)).
+
+Ubuntu, Centos, and Windows testing have been automated via vagrant, go to the respective directory and run `vagrant up`. You should be able to reach fusionauth and test it. If you want to use a host machine database, the hosts ip is `10.0.2.2` inside of the guest.
+
+To test a system go to the related directory and run `vagrant up`. You can then visit http://localhost:9011 in your systems browser (on the host) and see if fusionauth started up properly.
+
+Macos could potentially be tested the same way, but the vagrant boxes aren't legally allowed to be distributed this way so you would have to make your own.
+ 

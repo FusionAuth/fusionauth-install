@@ -37,7 +37,10 @@ function DownloadAndExpandZip($uri, $tempFile, $destination) {
     robocopy "$env:Temp/fusionauth" $destination /E /XC /XN /XO /NFL /NDL /NJH /NS /NC
 }
 
+$BASE_URL = "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth"
+# $BASE_URL = "http://bundles.local.fusionauth.io"
 $VERSION = Invoke-WebRequest -UseBasicParsing -Uri https://metrics.fusionauth.io/api/latest-version
+# $VERSION = "1.16.0"
 # Trim the trailing \ since we add it when we set the destination directory, and it may come back on the FullName property
 #  > C:\> (Get-Item -Path ".\").FullName       => C:\
 #  > C:\foo> (Get-Item -Path ".\").FullName    => C:\foo
@@ -57,8 +60,9 @@ if (Test-Path "$CURRENT_DIRECTORY\fusionauth\bin") {
 
 echo "Installing zip packages"
 
-DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-app-${VERSION}.zip" "$env:Temp\fusionauth-app.zip" "$CURRENT_DIRECTORY\fusionauth"
-DownloadAndExpandZip "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth/${VERSION}/fusionauth-search-${VERSION}.zip" "$env:Temp\fusionauth-search.zip" "$CURRENT_DIRECTORY\fusionauth"
+
+DownloadAndExpandZip "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION}.zip" "$env:Temp\fusionauth-app.zip" "$CURRENT_DIRECTORY\fusionauth"
+DownloadAndExpandZip "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}.zip" "$env:Temp\fusionauth-search.zip" "$CURRENT_DIRECTORY\fusionauth"
 
 Write-Output ""
 Write-Output "Install is complete. Time for tacos."

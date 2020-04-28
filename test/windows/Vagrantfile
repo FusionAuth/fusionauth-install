@@ -65,10 +65,19 @@ Vagrant.configure("2") do |config|
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "file", source: "install.ps1", destination: "C:/Users/vagrant/install.ps1"
+  # Use only one of the following
+  ## Without search
+  # config.vm.provision "shell", inline: <<-SHELL
+  #   Add-Content -Value "10.0.2.2 bundles.local.fusionauth.io" -Path C:/Windows/System32/drivers/etc/hosts
+  #   cd /Users/vagrant
+  #   ./install.ps1; install
+  #   ./fusionauth/bin/startup.bat
+  # SHELL
+  ## With search
   config.vm.provision "shell", inline: <<-SHELL
     Add-Content -Value "10.0.2.2 bundles.local.fusionauth.io" -Path C:/Windows/System32/drivers/etc/hosts
     cd /Users/vagrant
-    ./install.ps1
+    ./install.ps1; install -includeSearch 1
     ./fusionauth/bin/startup.bat
   SHELL
 

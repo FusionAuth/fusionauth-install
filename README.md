@@ -42,10 +42,15 @@ sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-instal
 ```
 
 #### Windows
-Download and install using ZIP packages
 
+Download and install using ZIP packages
 ```powershell
-iex (new-object net.webclient).downloadstring('https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.ps1')
+. { iwr -useb https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.ps1 } | iex; install
+```
+
+Install with search
+```powershell
+. { iwr -useb https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.ps1 } | iex; install -includeSearch 1
 ```
 
 If you run into an error, you may need to change your execution policy. `Set-ExecutionPolicy Bypass -scope CurrentUser`
@@ -87,5 +92,4 @@ Ubuntu, Centos, and Windows testing have been automated via vagrant, go to the r
 
 To test a system go to the related directory and run `vagrant up`. You can then visit http://localhost:9011 in your systems browser (on the host) and see if fusionauth started up properly.
 
-Macos could potentially be tested the same way, but the vagrant boxes aren't legally allowed to be distributed this way so you would have to make your own.
- 
+Macos could potentially be tested the same way, but the vagrant boxes aren't legally allowed to be distributed this way, so you would have to make your own. 

@@ -62,8 +62,6 @@ install_linux() {
 install_deb() {
     echo "Downloading deb packages"
 
-    packages="/tmp/fusionauth-app.deb"
-
     curl -fSL --progress-bar -o /tmp/fusionauth-app.deb "${BASE_URL}/${VERSION}/fusionauth-app_${VERSION}-1_all.deb"
 
     if [ $INCLUDE_SEARCH == 1 ]; then
@@ -72,8 +70,15 @@ install_deb() {
     fi
 
     echo "Installing deb packages"
-    # shellcheck disable=SC2086
-    sudo dpkg -i $packages
+
+    # Install search first so that we get the search version of fusionauth.properties
+    if [ $INCLUDE_SEARCH == 1 ]; then
+      echo "sudo dpkg -i /tmp/fusionauth-search.deb"
+      sudo dpkg -i /tmp/fusionauth-search.deb
+    fi
+
+    echo "sudo dpkg -i /tmp/fusionauth-app.deb"
+    sudo dpkg -i /tmp/fusionauth-app.deb
 
     # Ensure we completed the sudo request
     if [  $? -ne 0 ] ; then
@@ -91,18 +96,22 @@ install_deb() {
 install_rpm() {
     echo "Downloading RPM packages"
 
-    packages="/tmp/fusionauth-app.rpm"
-
     curl -fSL --progress-bar -o /tmp/fusionauth-app.rpm "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION//-/.}-1.noarch.rpm"
 
     if [ $INCLUDE_SEARCH == 1 ]; then
       curl -fSL --progress-bar -o /tmp/fusionauth-search.rpm "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION//-/.}-1.noarch.rpm"
-      packages="$packages /tmp/fusionauth-search.rpm"
     fi
 
     echo "Installing rpm packages"
-    # shellcheck disable=SC2086
-    sudo rpm -U $packages
+
+    # Install search first so that we get the search version of fusionauth.properties
+    if [ $INCLUDE_SEARCH == 1 ]; then
+      echo "sudo rpm -U /tmp/fusionauth-search.rpm"
+      sudo rpm -U /tmp/fusionauth-search.rpm
+    fi
+
+    echo "sudo rpm -U /tmp/fusionauth-app.rpm"
+    sudo rpm -U /tmp/fusionauth-app.rpm
 
     # Ensure we completed the sudo request
     if [  $? -ne 0 ] ; then
@@ -142,11 +151,12 @@ install_zip() {
 
     echo "Installing packages"
 
-    unzip -nq /tmp/fusionauth-app.zip -d ${TARGET_DIR}
-
+    # Install search first so that we get the search version of fusionauth.properties
     if [ $INCLUDE_SEARCH == 1 ]; then
       unzip -nq /tmp/fusionauth-search.zip -d ${TARGET_DIR}
     fi
+
+    unzip -nq /tmp/fusionauth-app.zip -d ${TARGET_DIR}
 
     echo ""
     echo "Install is complete. Time for tacos."

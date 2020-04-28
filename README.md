@@ -4,21 +4,41 @@ Software should be easy to install, so we've provided you with some shortcuts to
 
 ### Package Installs
 
-#### macOS
-Download and install using ZIP packages
+#### macOS / 'nix
+
+Note: Search is not installed by default anymore, if you would like search then supply `-s` to the installer script.
+
+Options:
+
+* `s` - Include the search engine. (Without it, we will fallback to database searches)
+* `z` - Use the zip install
+* `h` - Show the help text
+
+Environment variables:
+
+* `TARGET_DIR` - The location to install the zip (Defaults to `$PWD/fusionauth`)
+* `VERSION` - The version to install (Defaults to latest stable version)
+
+##### Examples
+
+Download and install (Automatic method will choose RPM, DEB, or ZIP depending on the available package manager)
 ```bash
 sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.sh | sh"
 ```
 
-#### Linux
-Download and install RPM or DEB packages
+Download and install with search
 ```bash
-sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.sh | sh"
+sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.sh | sh -s - -s"
 ```
 
 Download and install ZIP packages to current directory
 ```bash
 sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.sh | sh -s - -z"
+```
+
+Download and install ZIP packages (with search) to current directory
+```bash
+sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.sh | sh -s - -zs"
 ```
 
 #### Windows

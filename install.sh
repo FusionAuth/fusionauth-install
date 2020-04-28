@@ -10,6 +10,7 @@ fi
 BASE_URL="https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth"
 #BASE_URL="http://bundles.local.fusionauth.io"
 FORCE_ZIP=0
+INCLUDE_SEARCH=0
 # Download to the current working directory
 TARGET_DIR=${TARGET_DIR:-$(pwd)/fusionauth}
 
@@ -20,9 +21,14 @@ print_usage() {
     echo ""
     echo "options:"
     echo "-z   Force install using a zip file even if a supported package system is detected"
+    echo "-s   Include the search engine with this install. (Defaults to database search if this is not present)"
+    echo ""
+    echo "Environment:"
+    echo "TARGET_DIR  Choose a location to install to if using the zip (defaults to \$PWD/fusionauth)"
+    echo "VERSION     Choose a version to install (Defaults to the latest stable version)"
 }
 
-while getopts 'hz' opt
+while getopts 'hzs' opt
 do
     case "${opt}" in
         h)
@@ -31,6 +37,9 @@ do
             ;;
         z)
             FORCE_ZIP=1
+            ;;
+        s)
+            INCLUDE_SEARCH=1
             ;;
         *)
             print_usage
@@ -52,11 +61,19 @@ install_linux() {
 
 install_deb() {
     echo "Downloading deb packages"
+
+    packages="/tmp/fusionauth-app.deb"
+
     curl -fSL --progress-bar -o /tmp/fusionauth-app.deb "${BASE_URL}/${VERSION}/fusionauth-app_${VERSION}-1_all.deb"
-    curl -fSL --progress-bar -o /tmp/fusionauth-search.deb "${BASE_URL}/${VERSION}/fusionauth-search_${VERSION}-1_all.deb"
+
+    if [ $INCLUDE_SEARCH == 1 ]; then
+      curl -fSL --progress-bar -o /tmp/fusionauth-search.deb "${BASE_URL}/${VERSION}/fusionauth-search_${VERSION}-1_all.deb"
+      packages="$packages /tmp/fusionauth-search.deb"
+    fi
 
     echo "Installing deb packages"
-    sudo dpkg -i /tmp/fusionauth-app.deb /tmp/fusionauth-search.deb
+    # shellcheck disable=SC2086
+    sudo dpkg -i $packages
 
     # Ensure we completed the sudo request
     if [  $? -ne 0 ] ; then
@@ -74,11 +91,18 @@ install_deb() {
 install_rpm() {
     echo "Downloading RPM packages"
 
-    curl -fSL --progress-bar -o /tmp/fusionauth-app.rpm "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION}-1.noarch.rpm"
-    curl -fSL --progress-bar -o /tmp/fusionauth-search.rpm "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}-1.noarch.rpm"
+    packages="/tmp/fusionauth-app.rpm"
+
+    curl -fSL --progress-bar -o /tmp/fusionauth-app.rpm "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION//-/.}-1.noarch.rpm"
+
+    if [ $INCLUDE_SEARCH == 1 ]; then
+      curl -fSL --progress-bar -o /tmp/fusionauth-search.rpm "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION//-/.}-1.noarch.rpm"
+      packages="$packages /tmp/fusionauth-search.rpm"
+    fi
 
     echo "Installing rpm packages"
-    sudo rpm -U /tmp/fusionauth-app.rpm /tmp/fusionauth-search.rpm
+    # shellcheck disable=SC2086
+    sudo rpm -U $packages
 
     # Ensure we completed the sudo request
     if [  $? -ne 0 ] ; then
@@ -102,7 +126,10 @@ install_zip() {
     echo "Downloading zip packages"
 
     curl -fSL --progress-bar -o /tmp/fusionauth-app.zip "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION}.zip"
-    curl -fSL --progress-bar -o /tmp/fusionauth-search.zip "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}.zip"
+
+    if [ $INCLUDE_SEARCH == 1 ]; then
+      curl -fSL --progress-bar -o /tmp/fusionauth-search.zip "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}.zip"
+    fi
 
     if [ ! -d ${TARGET_DIR} ]; then
          mkdir -p ${TARGET_DIR}
@@ -116,7 +143,10 @@ install_zip() {
     echo "Installing packages"
 
     unzip -nq /tmp/fusionauth-app.zip -d ${TARGET_DIR}
-    unzip -nq /tmp/fusionauth-search.zip -d ${TARGET_DIR}
+
+    if [ $INCLUDE_SEARCH == 1 ]; then
+      unzip -nq /tmp/fusionauth-search.zip -d ${TARGET_DIR}
+    fi
 
     echo ""
     echo "Install is complete. Time for tacos."
@@ -125,9 +155,8 @@ install_zip() {
     echo "    ${TARGET_DIR}/bin/startup.sh"
 }
 
-# Get the latest version of FusionAuth
-VERSION=$(curl -s https://metrics.fusionauth.io/api/latest-version)
-#VERSION=1.16.0
+# Use the VERSION variable or get the latest version of FusionAuth if its not present
+VERSION=${VERSION:-$(curl -s https://metrics.fusionauth.io/api/latest-version)}
 
 case $(uname -s) in
     Linux*)     install_linux;;

@@ -85,7 +85,7 @@ Vagrant.configure("2") do |config|
   # SHELL
   ## Production
   config.vm.provision "shell", inline: <<-SHELL
-    sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-install/1.16.0/install.sh | sh"
+    sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-install/1.16.0/install.sh | sh -s - -s"
     service fusionauth-app start
     service fusionauth-search start
   SHELL

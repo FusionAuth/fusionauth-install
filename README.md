@@ -6,7 +6,7 @@ Software should be easy to install, so we've provided you with some shortcuts to
 
 #### macOS / 'nix
 
-Note: Search is not installed by default anymore, if you would like search then supply `-s` to the installer script.
+Note: Search is no longer installed by default anymore, if you would like search then supply `-s` to the installer script.
 
 Options:
 

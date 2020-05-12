@@ -64,7 +64,7 @@ install_deb() {
 
     curl -fSL --progress-bar -o /tmp/fusionauth-app.deb "${BASE_URL}/${VERSION}/fusionauth-app_${VERSION}-1_all.deb"
 
-    if [ $INCLUDE_SEARCH == 1 ]; then
+    if [ $INCLUDE_SEARCH -eq 1 ]; then
       curl -fSL --progress-bar -o /tmp/fusionauth-search.deb "${BASE_URL}/${VERSION}/fusionauth-search_${VERSION}-1_all.deb"
       packages="$packages /tmp/fusionauth-search.deb"
     fi
@@ -72,7 +72,7 @@ install_deb() {
     echo "Installing deb packages"
 
     # Install search first so that we get the search version of fusionauth.properties
-    if [ $INCLUDE_SEARCH == 1 ]; then
+    if [ $INCLUDE_SEARCH -eq 1 ]; then
       echo "sudo dpkg -i /tmp/fusionauth-search.deb"
       sudo dpkg -i /tmp/fusionauth-search.deb
     fi
@@ -98,14 +98,14 @@ install_rpm() {
 
     curl -fSL --progress-bar -o /tmp/fusionauth-app.rpm "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION//-/.}-1.noarch.rpm"
 
-    if [ $INCLUDE_SEARCH == 1 ]; then
+    if [ $INCLUDE_SEARCH -eq 1 ]; then
       curl -fSL --progress-bar -o /tmp/fusionauth-search.rpm "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION//-/.}-1.noarch.rpm"
     fi
 
     echo "Installing rpm packages"
 
     # Install search first so that we get the search version of fusionauth.properties
-    if [ $INCLUDE_SEARCH == 1 ]; then
+    if [ $INCLUDE_SEARCH -eq 1 ]; then
       echo "sudo rpm -U /tmp/fusionauth-search.rpm"
       sudo rpm -U /tmp/fusionauth-search.rpm
     fi
@@ -136,7 +136,7 @@ install_zip() {
 
     curl -fSL --progress-bar -o /tmp/fusionauth-app.zip "${BASE_URL}/${VERSION}/fusionauth-app-${VERSION}.zip"
 
-    if [ $INCLUDE_SEARCH == 1 ]; then
+    if [ $INCLUDE_SEARCH -eq 1 ]; then
       curl -fSL --progress-bar -o /tmp/fusionauth-search.zip "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}.zip"
     fi
 
@@ -152,7 +152,7 @@ install_zip() {
     echo "Installing packages"
 
     # Install search first so that we get the search version of fusionauth.properties
-    if [ $INCLUDE_SEARCH == 1 ]; then
+    if [ $INCLUDE_SEARCH -eq 1 ]; then
       unzip -nq /tmp/fusionauth-search.zip -d ${TARGET_DIR}
     fi
 

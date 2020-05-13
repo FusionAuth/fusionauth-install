@@ -46,11 +46,17 @@ sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-instal
 Download and install using ZIP packages
 ```powershell
 . { iwr -useb https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.ps1 } | iex; install
+REM Optionally register the service with the following commands
+cd fusionauth\fusionauth-app\apache-tomcat\bin
+FusionAuthApp.exe /install
 ```
 
 Download and install with Elasticsearch using ZIP packages
 ```powershell
 . { iwr -useb https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.ps1 } | iex; install -includeSearch 1
+REM Optionally register the service with the following commands
+cd fusionauth\fusionauth-app\apache-tomcat\bin
+FusionAuthApp.exe /install
 ```
 
 If you run into an error, you may need to change your execution policy. `Set-ExecutionPolicy Bypass -scope CurrentUser`

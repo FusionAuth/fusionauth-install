@@ -62,9 +62,18 @@ https://hub.docker.com/u/fusionauth/
 https://github.com/FusionAuth/fusionauth-containers
 
 #### Docker Compose
+The reference [docker-compose.yml](https://raw.githubusercontent.com/FusionAuth/fusionauth-containers/master/docker/fusionauth/docker-compose.yml) defaults to use the database as the User search engine.
+
+In order to install with Elasticsearch as the User search engine, include the reference  [docker-compose.override.yml](https://raw.githubusercontent.com/FusionAuth/fusionauth-containers/master/docker/fusionauth/docker-compose.override.yml).
+
+Review our [Docker Install Guide](https://fusionauth.io/docs/v1/tech/installation-guide/docker) for additional assistance.
 
 ```bash
-curl -o docker-compose.yml https://raw.githubusercontent.com/FusionAuth/fusionauth-containers/master/docker/fusionauth/docker-compose.yml && docker-compose up
+curl -o docker-compose.yml https://raw.githubusercontent.com/FusionAuth/fusionauth-containers/master/docker/fusionauth/docker-compose.yml
+# Uncomment the following line to install and configure Elasticsearch as the User search engine
+# curl -o docker-compose.override.yml https://raw.githubusercontent.com/FusionAuth/fusionauth-containers/master/docker/fusionauth/docker-compose.override.yml
+curl -o .env https://raw.githubusercontent.com/FusionAuth/fusionauth-containers/master/docker/fusionauth/.env
+docker-compose up
 ```
 
 #### Docker Images
@@ -75,7 +84,7 @@ FusionAuth App ([On Docker Hub](https://hub.docker.com/r/fusionauth/fusionauth-a
 docker pull fusionauth/fusionauth-app
 ```
 
-When running FusionAuth in Docker, it is recommended to either connect to an external Elasticsearch service, or use the Docker images provided by Elasticsearch. See `docker-compose.yml` for example. 
+When running FusionAuth in Docker, it is recommended to either connect to an external Elasticsearch service, or use the Docker images provided by Elasticsearch. See `docker-compose.yml` and `docker-compose.override.yml` for an example in configuring Elasticsearch with FusionAuth. 
 
 ### Documentation
 

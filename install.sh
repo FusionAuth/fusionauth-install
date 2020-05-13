@@ -8,7 +8,6 @@ if ! hash curl > /dev/null 2>&1; then
 fi
 
 BASE_URL="https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth"
-#BASE_URL="http://bundles.local.fusionauth.io"
 FORCE_ZIP=0
 INCLUDE_SEARCH=0
 # Download to the current working directory
@@ -88,8 +87,12 @@ install_deb() {
     echo ""
     echo "Install is complete. Time for tacos."
     echo ""
+    if [ $INCLUDE_SEARCH -eq 1 ]; then
     echo " 1. To start FusionAuth run the following commands"
     echo "    sudo service fusionauth-search start"
+    else
+    echo " 1. To start FusionAuth run the following command"
+    fi
     echo "    sudo service fusionauth-app start"
 }
 

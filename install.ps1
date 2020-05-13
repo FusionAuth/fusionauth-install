@@ -52,9 +52,7 @@ new-module -name FusionAuth -scriptblock {
         }
 
         $BASE_URL = "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth"
-#        $BASE_URL = "http://bundles.local.fusionauth.io"
         $VERSION = Invoke-WebRequest -UseBasicParsing -Uri https://metrics.fusionauth.io/api/latest-version
-#        $VERSION = "1.16.0-RC.2"
         # Trim the trailing \ since we add it when we set the destination directory, and it may come back on the FullName property
         #  > C:\> (Get-Item -Path ".\").FullName       => C:\
         #  > C:\foo> (Get-Item -Path ".\").FullName    => C:\foo

@@ -84,7 +84,7 @@ FusionAuth App ([On Docker Hub](https://hub.docker.com/r/fusionauth/fusionauth-a
 docker pull fusionauth/fusionauth-app
 ```
 
-When running FusionAuth in Docker, it is recommended to either connect to an external Elasticsearch service, or use the Docker images provided by Elasticsearch. See `docker-compose.yml` and `docker-compose.override.yml` for an example in configuring Elasticsearch with FusionAuth. 
+When running FusionAuth in Docker with Elasticsearch as the User search engine, it is recommended to either connect to an external Elasticsearch service, or use the Docker images provided by Elasticsearch. See the reference `docker-compose.yml` and `docker-compose.override.yml` in the [fusionauth-containers repository](https://github.com/FusionAuth/fusionauth-containers/tree/master/docker/fusionauth) for an example in configuring Elasticsearch with FusionAuth. 
 
 ### Documentation
 

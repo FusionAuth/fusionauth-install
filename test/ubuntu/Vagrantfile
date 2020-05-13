@@ -64,9 +64,28 @@ Vagrant.configure("2") do |config|
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "file", source: "install.sh", destination: "install.sh"
+  # Use one of the following:
+  ## With search
+  # config.vm.provision "shell", inline: <<-SHELL
+  #   echo "10.0.2.2 bundles.local.fusionauth.io" >> /etc/hosts
+  #   VERSION=1.16.0-RC.1 ./install.sh -s
+  #   service fusionauth-app start
+  #   service fusionauth-search start
+  # SHELL
+  ## Without search (default)
+  # config.vm.provision "shell", inline: <<-SHELL
+  #   echo "10.0.2.2 bundles.local.fusionauth.io" >> /etc/hosts
+  #   VERSION=1.16.0-RC.1 ./install.sh
+  #   service fusionauth-app start
+  # SHELL
+  ## Zip
+  # config.vm.provision "shell", inline: <<-SHELL
+  #   VERSION=1.16.0-RC.1 ./install.sh -z
+  #   ./fusionauth/bin/startup.sh
+  # SHELL
+  ## Production
   config.vm.provision "shell", inline: <<-SHELL
-    echo "10.0.2.2 bundles.local.fusionauth.io" >> /etc/hosts
-    ./install.sh
+    sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-install/1.16.0/install.sh | sh -s - -s"
     service fusionauth-app start
     service fusionauth-search start
   SHELL

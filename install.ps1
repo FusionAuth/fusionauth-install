@@ -51,7 +51,7 @@ new-module -name FusionAuth -scriptblock {
             robocopy "$env:Temp/fusionauth" $destination /E /XC /XN /XO /NFL /NDL /NJH /NS /NC
         }
 
-        $BASE_URL = "https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth"
+        $BASE_URL = "https://files.fusionauth.io/products/fusionauth"
         $VERSION = Invoke-WebRequest -UseBasicParsing -Uri https://metrics.fusionauth.io/api/latest-version
         # Trim the trailing \ since we add it when we set the destination directory, and it may come back on the FullName property
         #  > C:\> (Get-Item -Path ".\").FullName       => C:\

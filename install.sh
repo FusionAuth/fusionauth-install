@@ -7,7 +7,7 @@ if ! hash curl > /dev/null 2>&1; then
     exit 1
 fi
 
-BASE_URL="https://storage.googleapis.com/inversoft_products_j098230498/products/fusionauth"
+BASE_URL="https://files.fusionauth.io/products/fusionauth"
 FORCE_ZIP=0
 INCLUDE_SEARCH=0
 # Download to the current working directory

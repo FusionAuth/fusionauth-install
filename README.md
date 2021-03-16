@@ -43,7 +43,7 @@ sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-instal
 
 #### Windows
 
-Download and install using ZIP packages
+Download and install using ZIP packages.  Install using Windows PowerShell
 ```powershell
 . { iwr -useb https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.ps1 } | iex; install
 REM Optionally register the service with the following commands
@@ -51,7 +51,7 @@ cd fusionauth\fusionauth-app\apache-tomcat\bin
 FusionAuthApp.exe /install
 ```
 
-Download and install with Elasticsearch using ZIP packages
+Download and install with Elasticsearch using ZIP packages.  Install using Windows PowerShell
 ```powershell
 . { iwr -useb https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.ps1 } | iex; install -includeSearch 1
 REM Optionally register the service with the following commands

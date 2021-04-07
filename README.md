@@ -15,7 +15,7 @@ Options:
 * `h` - Show the help text.
 
 Environment variables:
-
+(Setting environment variables is as simple as exporting from your shell. See [here](https://en.wikipedia.org/wiki/Environment_variable#Assignment).
 * `TARGET_DIR` - The location to install the zip. Defaults value is `$PWD/fusionauth`. This value is ignored when installing Debian or RPM packages.
 * `VERSION` - The version to install. Defaults to the latest stable version.
 

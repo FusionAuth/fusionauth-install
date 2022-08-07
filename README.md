@@ -1,4 +1,4 @@
-# FusionAuth Install
+# FusionAuth FastPath(tm) Install
 
 Software should be easy to install, so we've provided you with some shortcuts to getting up and running. 
 
@@ -11,7 +11,6 @@ Note: Elasticsearch is not installed by default. To install Elasticsearch supply
 Options:
 
 * `s` - Install Elasticsearch. Elasticsearch provides enhanced search capability in FusionAuth.
-* `z` - Use the zip install.
 * `h` - Show the help text.
 
 Environment variables:
@@ -21,29 +20,21 @@ Environment variables:
 
 ##### Examples
 
-Download and install by automatically selecting RPM, DEB, or ZIP depending on the available package manager
+Download and install FusionAuth without Elasticsearch
 ```bash
 sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.sh | sh"
 ```
 
-Download and install with Elasticsearch by automatically selecting RPM, DEB, or ZIP depending on the available package manager
+Download and install with Elasticsearch
 ```bash
 sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.sh | sh -s - -s"
 ```
 
-Download and install ZIP packages to the current directory
-```bash
-sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.sh | sh -s - -z"
-```
-
-Download and install ZIP packages with Elasticsearch to the current directory
-```bash
-sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.sh | sh -s - -zs"
-```
-
 #### Windows
 
-Download and install using ZIP packages
+**NOTE:** The Windows FastPath installation process does not currently work with FusionAuth version 1.37.0 and above. We are exploring supporting WSLv2 or Powershell runtimes. Stay tuned for updates.
+
+Download and install FusionAuth without Elasticsearch
 ```powershell
 . { iwr -useb https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.ps1 } | iex; install
 REM Optionally register the service with the following commands
@@ -51,7 +42,7 @@ cd fusionauth\fusionauth-app\apache-tomcat\bin
 FusionAuthApp.exe /install
 ```
 
-Download and install with Elasticsearch using ZIP packages
+Download and install FusionAuth with Elasticsearch
 ```powershell
 . { iwr -useb https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.ps1 } | iex; install -includeSearch 1
 REM Optionally register the service with the following commands

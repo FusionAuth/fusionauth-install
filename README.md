@@ -32,8 +32,6 @@ sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-instal
 
 #### Windows
 
-**NOTE:** The Windows FastPath installation process does not currently work with FusionAuth version 1.37.0 and above. We are exploring supporting WSLv2 or Powershell runtimes. Stay tuned for updates.
-
 Download and install FusionAuth without Elasticsearch
 ```powershell
 . { iwr -useb https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.ps1 } | iex; install

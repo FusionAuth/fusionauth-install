@@ -38,7 +38,7 @@ Download and install FusionAuth without Elasticsearch
 ```powershell
 . { iwr -useb https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.ps1 } | iex; install
 REM Optionally register the service with the following commands
-cd fusionauth\fusionauth-app\apache-tomcat\bin
+cd fusionauth\fusionauth-app\bin
 FusionAuthApp.exe /install
 ```
 
@@ -46,7 +46,7 @@ Download and install FusionAuth with Elasticsearch
 ```powershell
 . { iwr -useb https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.ps1 } | iex; install -includeSearch 1
 REM Optionally register the service with the following commands
-cd fusionauth\fusionauth-app\apache-tomcat\bin
+cd fusionauth\fusionauth-app\bin
 FusionAuthApp.exe /install
 ```
 

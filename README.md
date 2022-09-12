@@ -91,6 +91,6 @@ The install scripts must be compatible with CentOS, Ubuntu, Windows and macOS.
 
 Ubuntu, Centos, and Windows testing have been automated via vagrant, go to the respective directory and run `vagrant up`. Once the VM has started you should be able to reach FusionAuth to perform any required testing. If you want to use a host machine database, the hosts IP address is `10.0.2.2` inside of the guest.
 
-To test a system go to the related directory and run `vagrant up`. You can then visit http://localhost:9011 in your systems browser (on the host) and see if FusionAuth started up properly.
+To test a system go to the related directory and run `vagrant up`. You can then visit http://localhost:9011 in your system's browser (on the host) and see if FusionAuth started up properly.
 
 macOS could potentially be tested the same way, but the vagrant boxes aren't legally allowed to be distributed this way, so you would have to make your own. 

@@ -32,13 +32,11 @@ sh -c "curl -fsSL https://raw.githubusercontent.com/FusionAuth/fusionauth-instal
 
 #### Windows
 
-**NOTE:** The Windows FastPath installation process does not currently work with FusionAuth version 1.37.0 and above. We are exploring supporting WSLv2 or Powershell runtimes. Stay tuned for updates.
-
 Download and install FusionAuth without Elasticsearch
 ```powershell
 . { iwr -useb https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.ps1 } | iex; install
 REM Optionally register the service with the following commands
-cd fusionauth\fusionauth-app\apache-tomcat\bin
+cd fusionauth\fusionauth-app\bin
 FusionAuthApp.exe /install
 ```
 
@@ -46,7 +44,7 @@ Download and install FusionAuth with Elasticsearch
 ```powershell
 . { iwr -useb https://raw.githubusercontent.com/FusionAuth/fusionauth-install/master/install.ps1 } | iex; install -includeSearch 1
 REM Optionally register the service with the following commands
-cd fusionauth\fusionauth-app\apache-tomcat\bin
+cd fusionauth\fusionauth-app\bin
 FusionAuthApp.exe /install
 ```
 
@@ -93,6 +91,6 @@ The install scripts must be compatible with CentOS, Ubuntu, Windows and macOS.
 
 Ubuntu, Centos, and Windows testing have been automated via vagrant, go to the respective directory and run `vagrant up`. Once the VM has started you should be able to reach FusionAuth to perform any required testing. If you want to use a host machine database, the hosts IP address is `10.0.2.2` inside of the guest.
 
-To test a system go to the related directory and run `vagrant up`. You can then visit http://localhost:9011 in your systems browser (on the host) and see if FusionAuth started up properly.
+To test a system go to the related directory and run `vagrant up`. You can then visit http://localhost:9011 in your browser and see if FusionAuth started up properly.
 
 macOS could potentially be tested the same way, but the vagrant boxes aren't legally allowed to be distributed this way, so you would have to make your own. 

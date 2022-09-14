@@ -86,7 +86,7 @@ new-module -name FusionAuth -scriptblock {
         Write-Output "Install is complete. Time for tacos."
         Write-Output ""
         Write-Output " 1. To start FusionAuth run the following command"
-        Write-Output "    .\fusionauth\bin\startup.bat"
+        Write-Output "    .\fusionauth\bin\startup.ps1"
         Write-Output ""
         Write-Output " 2. To begin, access FusionAuth by opening a browser to http://localhost:9011"
         Write-Output ""

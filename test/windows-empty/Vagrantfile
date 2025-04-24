@@ -1,0 +1,17 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  # Windows 11
+  config.vm.box = "utm/windows-11"
+
+  # Forward ports so we can test that FusionAuth is running
+  config.vm.network "forwarded_port", guest: 9011, host: 9011, host_ip: "127.0.0.1"
+
+  # Bump RAM and CPU
+  config.vm.provider "utm" do |vb|
+    vb.check_guest_additions = false
+    vb.cpus = 4
+    vb.memory = "4096"
+  end
+end

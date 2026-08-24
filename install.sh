@@ -32,9 +32,15 @@ install_zip() {
     curl -fSL --progress-bar -o /tmp/fusionauth-search.zip "${BASE_URL}/${VERSION}/fusionauth-search-${VERSION}.zip"
   fi
 
+  if [ -z "${TARGET_DIR}" ]; then
+    echo "Need to set TARGET_DIR to a valid directory. Set it and try again."
+    exit 1
+  fi
+
   if [[ ! -d ${TARGET_DIR} ]]; then
     mkdir -p "${TARGET_DIR}"
   else
+
     # Remove the existing directories (We won't overwrite otherwise)
     rm -rf "${TARGET_DIR}/fusionauth-app"
     rm -rf "${TARGET_DIR}/fusionauth-search"

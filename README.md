@@ -63,13 +63,9 @@ FusionAuthApp.exe /install
 
 ### Other options
 
-We have a bunch of other ways to download and install FusionAuth. Those options are located here:
+For more ways to download and install FusionAuth, see the documentation:
 
-https://fusionauth.io/download
-
-### Documentation
-
-https://fusionauth.io/docs
+https://fusionauth.io/docs/get-started/download-and-install/docker
 
 ## Development
 
